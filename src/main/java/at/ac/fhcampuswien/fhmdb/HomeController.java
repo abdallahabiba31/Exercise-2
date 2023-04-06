@@ -63,12 +63,15 @@ public class HomeController implements Initializable {
                 Genres.COMEDY, Genres.CRIME, Genres.DOCUMENTARY, Genres.FAMILY, Genres.FANTASY, Genres.HISTORY, Genres.HORROR, Genres.MUSICAL,
                 Genres.MYSTERY, Genres.ROMANCE, Genres.SCIENCE_FICTION, Genres.WESTERN, Genres.WAR, Genres.SPORT, Genres.THRILLER);
 
+        //TODO UI adaptieren
+        //Ergänzt euer UI soweit, dass User*innen die gesendeten Parameter individuell einstellen können
+        //(query, genre, releaseYear, ratingFrom)
+
         // TODO
         releaseYearComboBox.setPromptText("Filter by Release Year");
 
         //TODO
         ratingComboBox.setPromptText("Filter by Rating");
-
 
 
 
@@ -162,5 +165,28 @@ public class HomeController implements Initializable {
         }
         return movieList;
     }
+    //TODO Methoden unter Verwendung von Streams im Controller zu implementieren
+    // Methoden auskommentieren und daran arbeiten
 
+    // gibt jene Person zurück, die am öftesten im mainCast der übergebenen Filme vorkommt.
+    /*
+    public String getMostPopularActor(List<Movie> movies){
+        return
+    }
+    //filtert auf den längsten Filmtitel der übergebenen Filme und
+    // gibt die Anzahl der Buchstaben des Titels zurück
+    public int getLongestMovieTitle(List<Movie> movies){
+        return
+    }
+    //gibt die Anzahl der
+    //Filme eines bestimmten Regisseurs zurück.
+    public long countMoviesFrom(List<Movie> movies, String director){
+        return
+    }
+    //gibt jene Filme zurück, die zwischen zwei gegebenen Jahren veröffentlicht wurden.
+    public List<Movie> getMoviesBetweenYears(List<Movie> movies, int startYear, int
+            endYear){
+        return
+    }
+*/
 }
