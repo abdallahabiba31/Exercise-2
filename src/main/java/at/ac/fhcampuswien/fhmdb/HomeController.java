@@ -33,6 +33,10 @@ public class HomeController implements Initializable {
 
     @FXML
     public JFXComboBox genreComboBox;
+    @FXML
+    public JFXComboBox releaseYearComboBox;
+    @FXML
+    public JFXComboBox ratingComboBox;
 
     @FXML
     public JFXButton sortBtn;
@@ -53,16 +57,20 @@ public class HomeController implements Initializable {
         movieListView.setItems(observableMovies);   // set data of observable list to list view
         movieListView.setCellFactory(movieListView -> new MovieCell()); // use custom cell factory to display data
 
-        // TODO add genre filter items with genreComboBox.getItems().addAll(...)
         genreComboBox.setPromptText("Filter by Genre");
         //probably they are more efficient ways to do this but :)
         genreComboBox.getItems().addAll(Genres.ACTION, Genres.DRAMA, Genres.ADVENTURE, Genres.ANIMATION, Genres.BIOGRAPHY,
                 Genres.COMEDY, Genres.CRIME, Genres.DOCUMENTARY, Genres.FAMILY, Genres.FANTASY, Genres.HISTORY, Genres.HORROR, Genres.MUSICAL,
                 Genres.MYSTERY, Genres.ROMANCE, Genres.SCIENCE_FICTION, Genres.WESTERN, Genres.WAR, Genres.SPORT, Genres.THRILLER);
 
-        // TODO add event handlers to buttons and call the regarding methods
-        // either set event handlers in the fxml file (onAction) or add them here
-        // wanted to do this but don#t know how to test them
+        // TODO
+        releaseYearComboBox.setPromptText("Filter by Release Year");
+
+        //TODO
+        ratingComboBox.setPromptText("Filter by Rating");
+
+
+
 
         // Sort button
         sortBtn.setOnAction(actionEvent -> {
@@ -154,49 +162,5 @@ public class HomeController implements Initializable {
         }
         return movieList;
     }
-
-    //the old how we wanted to do this
-    //tests hindered us
-    //had to
-    /*public void filterMovies(ActionEvent actionEvent) {
-
-        String search = searchField.getText().toLowerCase();
-        List<Movie> filteredMovies = new ArrayList<>();
-
-        if (searchField.getText() != null) {
-            //System.out.println(searchField.getText());
-
-            //check if search query not contains in the movie(title and description) and then remove this movie from the list
-            observableMovies.removeIf(x -> !x.getTitle().toLowerCase().contains(search) && !x.getDescription().toLowerCase().contains(search));
-
-            //another way to remove the movies
-            //for (Movie movies : allMovies) {
-            // if (observableMovies.removeIf(movie -> !movie.getTitle().toLowerCase().contains(search) && !movie.getDescription().toLowerCase().contains(search))) {
-            //filteredMovies.add(movies);
-            // }
-            // }
-
-            //to clear the input after filtering
-            searchField.clear();
-        }
-        if (genreComboBox.getValue() != null) {
-            //Creating list with the filtered genre movies
-            List<Movie> rem = observableMovies.stream()
-                    .filter(q -> q.getGenre().contains(genreComboBox.getValue()))
-                    .collect(Collectors.toList());
-
-            //removing the not filtered elements
-            //reverse system somehow
-            observableMovies.removeIf(q -> !rem.contains(q));
-        }
-    }
-    public void clearFilter(ActionEvent actionEvent) {
-
-        //clear the combobox and then set the text of it
-        genreComboBox.getSelectionModel().clearSelection();
-        genreComboBox.setPromptText("Filter by Genre");
-        //showing all the movies
-        observableMovies.addAll(allMovies);
-    }*/
 
 }
