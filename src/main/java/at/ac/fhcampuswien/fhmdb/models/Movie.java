@@ -2,6 +2,7 @@ package at.ac.fhcampuswien.fhmdb.models;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class Movie {
@@ -9,10 +10,46 @@ public class Movie {
     private String description;
     private List<Genres> genre;
 
+    //TODO
+    private String id;
+    private String imgUrl;
+    private int releaseYear;
+    private int lengthInMinutes;
+    private float rating;
+    private List<String> directors;
+    private List<String> maincast;
+    private List<String> writers;
+
+    //den "alten" Konstruktor so gelassen und einen weiteren hinzugefügt
     public Movie(String title, String description, List<Genres> genre) {
         this.title = title;
         this.description = description;
         this.genre = genre;
+        //TODO
+        this.id = null;
+        this.releaseYear = 0;
+        this.imgUrl = "";
+        this.lengthInMinutes = 0;
+        this.directors = null;
+        this.writers = null;
+        this.maincast = null;
+        this.rating = 0;
+    }
+
+    //TODO
+    //weiteren Konstruktor mit allen Attributen
+    public Movie(String title, String description, List<Genres> genre,String id, int releaseYear, String imgUrl, int lengthInMinutes, List<String> directors, List<String> writers, List<String> maincast, float rating) {
+        this.title = title;
+        this.description = description;
+        this.genre = genre;
+        this.id = id;
+        this.releaseYear = releaseYear;
+        this.imgUrl = imgUrl;
+        this.lengthInMinutes = lengthInMinutes;
+        this.directors = directors;
+        this.writers = writers;
+        this.maincast = maincast;
+        this.rating = rating;
     }
     //Ich weiß nicht genau, was das macht, aber hat der Tutor gezeigt gehabt
     @Override
@@ -39,6 +76,31 @@ public class Movie {
 
     public List<Genres> getGenre() {
         return genre;
+    }
+    //TODO variablen hinzufügen
+    public String getId() {
+        return id;
+    }
+    public List<String> getDirectors() {
+        return directors;
+    }
+    public List<String> getMaincast() {
+        return maincast;
+    }
+    public List<String> getWriters() {
+        return writers;
+    }
+    public int getReleaseYear(){
+        return releaseYear;
+    }
+    public int getLengthInMinutes(){
+        return lengthInMinutes;
+    }
+    public float getRating() {
+        return rating;
+    }
+    public String getImgUrl() {
+        return imgUrl;
     }
 
     public static List<Movie> initializeMovies(){
@@ -75,4 +137,5 @@ public class Movie {
 
         return movies;
     }
+
 }
