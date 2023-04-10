@@ -64,10 +64,12 @@ public class HomeController implements Initializable {
         movieListView.setCellFactory(movieListView -> new MovieCell()); // apply custom cells to the listview
 
         // Add genres
-        Object[] genres = Genres.values();   // get all genres
-        genreComboBox.getItems().add("No filter");  // add "no filter" to the ComboBox
-        genreComboBox.getItems().addAll(genres);    // add all genres to the ComboBox
+        //genreComboBox.getItems().add("No filter");  // add "no filter" to the ComboBox
         genreComboBox.setPromptText("Filter by Genre");
+        //probably they are more efficient ways to do this but :)
+        genreComboBox.getItems().addAll(Genres.ACTION, Genres.DRAMA, Genres.ADVENTURE, Genres.ANIMATION, Genres.BIOGRAPHY,
+                Genres.COMEDY, Genres.CRIME, Genres.DOCUMENTARY, Genres.FAMILY, Genres.FANTASY, Genres.HISTORY, Genres.HORROR, Genres.MUSICAL,
+                Genres.MYSTERY, Genres.ROMANCE, Genres.SCIENCE_FICTION, Genres.WESTERN, Genres.WAR, Genres.SPORT, Genres.THRILLER);
 
         // Add release years
         Integer[] releaseYears = new Integer[78];
@@ -82,7 +84,26 @@ public class HomeController implements Initializable {
         Double[] rating = new Double[]{1.00, 2.00, 3.00, 4.00, 5.00, 6.00, 7.00, 8.00, 9.00};
         ratingComboBox.getItems().addAll(rating);
         ratingComboBox.setPromptText("Filter by rating: selected or higher");
+
+        // Sort button
+        sortBtn.setOnAction(actionEvent -> {
+            sortMovies(observableMovies, sortBtn.getText());
+        });
+        //clear button
+        clearBtn.setOnAction(actionEvent -> {
+            clearFilter();
+        });
+        //search button
+        searchBtn.setOnAction(actionEvent -> {
+            String searchQuery = searchField.getText().trim().toLowerCase();
+            Object genre = genreComboBox.getSelectionModel().getSelectedItem();
+            Integer releaseYear = (Integer) releaseYearComboBox.getSelectionModel().getSelectedItem();
+            double rating2 = (Double) ratingComboBox.getSelectionModel().getSelectedItem();
+
+            applyAllFilters(searchQuery, genre, releaseYear, rating2);
+        });
     }
+
 
 
     public void sortMovies() {
@@ -213,5 +234,11 @@ public class HomeController implements Initializable {
 
     // Streams:
     //TODO: String getMostPopularActor(List<Movie> movies)
+    //gibt anzahl der filme eines bestimmten regisseurs zurück
+    public long countMoviesFrom(List<Movie> movies, String director) {
+        return movies.stream()
+                .filter(movie -> movie.directors != null && Arrays.asList(movie.directors).contains(director))
+                .count();
+    }
 
 }
