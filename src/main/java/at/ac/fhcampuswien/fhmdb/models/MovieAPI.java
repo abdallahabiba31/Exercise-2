@@ -11,12 +11,12 @@ import com.google.gson.*;
 
 
 public class MovieAPI {
-    private static final String URL = "http://localhost:8080/movies";
+    private static final String BASE_URL = "https://prog2.fh-campuswien.ac.at/movies";
     private static final String DELIMITER = "&";
 
     private static String buildURL(String query, Genres genre, String releaseYear, String ratingFrom){
 
-        StringBuilder url = new StringBuilder(URL);
+        StringBuilder url = new StringBuilder(BASE_URL);
 
         if((query != null && !query.isEmpty())|| genre != null || releaseYear != null || ratingFrom != null) {
             url.append("?");
@@ -53,8 +53,7 @@ public class MovieAPI {
         try (Response response = client.newCall(request).execute()){
             String responseBody = response.body().string();
             Gson gson = new Gson();
-            System.out.println(responseBody);
-            
+            //System.out.println(responseBody);
             Movie[] movies = gson.fromJson(responseBody, Movie[].class);
 
             return Arrays.asList(movies);

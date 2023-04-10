@@ -8,23 +8,23 @@ import java.util.List;
 public class Movie {
     private String title;
     private String description;
-    private List<Genres> genre;
+    private List<Genres> genres;
 
     //TODO
     private String id;
     private String imgUrl;
     private int releaseYear;
     private int lengthInMinutes;
-    private float rating;
+    private double rating;
     private List<String> directors;
-    private List<String> maincast;
+    private List<String> mainCast;
     private List<String> writers;
 
     //den "alten" Konstruktor so gelassen und einen weiteren hinzugefügt
-    public Movie(String title, String description, List<Genres> genre) {
+    public Movie(String title, String description, List<Genres> genres) {
         this.title = title;
         this.description = description;
-        this.genre = genre;
+        this.genres = genres;
         //TODO
         this.id = null;
         this.releaseYear = 0;
@@ -32,23 +32,23 @@ public class Movie {
         this.lengthInMinutes = 0;
         this.directors = null;
         this.writers = null;
-        this.maincast = null;
+        this.mainCast = null;
         this.rating = 0;
     }
 
     //TODO
     //weiteren Konstruktor mit allen Attributen
-    public Movie(String title, String description, List<Genres> genre,String id, int releaseYear, String imgUrl, int lengthInMinutes, List<String> directors, List<String> writers, List<String> maincast, float rating) {
+    public Movie(String title, String description, List<Genres> genres,String id, int releaseYear, String imgUrl, int lengthInMinutes, List<String> directors, List<String> writers, List<String> mainCast, float rating) {
         this.title = title;
         this.description = description;
-        this.genre = genre;
+        this.genres = genres;
         this.id = id;
         this.releaseYear = releaseYear;
         this.imgUrl = imgUrl;
         this.lengthInMinutes = lengthInMinutes;
         this.directors = directors;
         this.writers = writers;
-        this.maincast = maincast;
+        this.mainCast = mainCast;
         this.rating = rating;
     }
     //Ich weiß nicht genau, was das macht, aber hat der Tutor gezeigt gehabt
@@ -63,7 +63,7 @@ public class Movie {
         if(!(object instanceof Movie other)){
             return false;
         }
-        return this.title.equals(other.title) && this.description.equals(other.description) && this.genre.equals(other.genre);
+        return this.title.equals(other.title) && this.description.equals(other.description) && this.genres.equals(other.genres);
     }
 
     public String getTitle() {
@@ -75,7 +75,7 @@ public class Movie {
     }
 
     public List<Genres> getGenre() {
-        return genre;
+        return genres;
     }
     //TODO variablen hinzufügen
     public String getId() {
@@ -85,7 +85,7 @@ public class Movie {
         return directors;
     }
     public List<String> getMaincast() {
-        return maincast;
+        return mainCast;
     }
     public List<String> getWriters() {
         return writers;
@@ -96,7 +96,7 @@ public class Movie {
     public int getLengthInMinutes(){
         return lengthInMinutes;
     }
-    public float getRating() {
+    public double getRating() {
         return rating;
     }
     public String getImgUrl() {
@@ -105,7 +105,6 @@ public class Movie {
 
     public static List<Movie> initializeMovies(){
         List<Movie> movies = new ArrayList<>();
-        // TODO add some dummy data here
         movies.add(new Movie("Fast & Furious 10",
                 "Es handelt sich um den elften Spielfilm innerhalb der Fast-&-Furious-Filmreihe und um eine Fortsetzung zu Fast & Furious 9 aus dem Jahr 2021.",
                 Arrays.asList(Genres.ACTION)));
@@ -134,7 +133,6 @@ public class Movie {
         /*movies.add(new Movie("",
                 "",
                 Arrays.asList(Genres.ACTION)));*/
-
         return movies;
     }
 
