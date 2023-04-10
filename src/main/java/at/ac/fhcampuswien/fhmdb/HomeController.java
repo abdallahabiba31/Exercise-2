@@ -255,10 +255,10 @@ public class HomeController implements Initializable {
 
     // Check Streams:
     public static void main(String[] args) {
-        //System.out.println(getMoviesBetweenYears(Movie.memeMovies(), 1999,2000));
-        //System.out.println(countMoviesFrom(Movie.memeMovies(), "hi"));
-        //System.out.println(getLongestMovieTitle(Movie.memeMovies()));
-        //System.out.println(getMostPopularActor(Movie.memeMovies()));
+        //System.out.println(getMoviesBetweenYears(exampleMovies, 1999,2000));
+        //System.out.println(countMoviesFrom(exampleMovies, "hi"));
+        //System.out.println(getLongestMovieTitle(exampleMovies));
+        //System.out.println(getMostPopularActor(exampleMovies));
 
     }
 
