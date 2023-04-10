@@ -59,6 +59,7 @@ public class HomeController implements Initializable {
 
     }
 
+
     public void initializeLayout() {
         movieListView.setItems(observableMovies);   // set the items of the listview to the observable list
         movieListView.setCellFactory(movieListView -> new MovieCell()); // apply custom cells to the listview
@@ -105,37 +106,10 @@ public class HomeController implements Initializable {
     }
 
 
-
-    public void sortMovies() {
-        /*
-        if (sortedState == SortedState.NONE || sortedState == SortedState.DESCENDING) {
-            observableMovies.sort(Comparator.comparing(Movie::getTitle));
-            sortedState = SortedState.ASCENDING;
-        } else if (sortedState == SortedState.ASCENDING) {
-            observableMovies.sort(Comparator.comparing(Movie::getTitle).reversed());
-            sortedState = SortedState.DESCENDING;
-        }*/
-    }
-
-    public List<Movie> filterByQuery(List<Movie> movies, String query) {
-        if (query == null || query.isEmpty()) return movies;
-
-        if (movies == null) {
-            throw new IllegalArgumentException("movies must not be null");
-        }
-
-        return movies.stream()
-                .filter(Objects::nonNull)
-                .filter(movie ->
-                        movie.getTitle().toLowerCase().contains(query.toLowerCase()) ||
-                                movie.getDescription().toLowerCase().contains(query.toLowerCase())
-                )
-                .toList();
-    }
-
-
     public List<Movie> filterByReleaseYear(List<Movie> movies, Integer releaseYear) {
-        if (releaseYear == null) return movies;
+        if (releaseYear == null){
+            return movies;
+        }
 
         if (movies == null) {
             throw new IllegalArgumentException("movies must not be null");
@@ -146,6 +120,32 @@ public class HomeController implements Initializable {
                 .filter(movie -> movie.getReleaseYear() == releaseYear)
                 .toList();
     }
+
+
+
+    public void sortMovies(ObservableList<Movie> movies, String sortBtnText) {
+        if (sortBtnText.equals("Sort (asc)")) {
+            sortBtn.setText("Sort (desc)");
+            //specifies that the items in the list should be sorted based on the title of the movie
+            //"Movie::getTitle" is a method that returns the title of the movie like a "shortcut"
+            movies.sort(Comparator.comparing(Movie::getTitle));
+
+        } else {
+            sortBtn.setText("Sort (desc)");
+            movies.sort(Comparator.comparing(Movie::getTitle).reversed());
+            sortBtn.setText("Sort (asc)");
+        }
+    }
+    public void clearFilter() {
+        genreComboBox.getSelectionModel().clearSelection();
+        releaseYearComboBox.getSelectionModel().clearSelection();
+        ratingComboBox.getSelectionModel().clearSelection();
+        searchField.clear();
+
+        initializeState();
+    }
+
+
 
 
     public List<Movie> filterByRating(List<Movie> movies, String rating) {
@@ -232,13 +232,15 @@ public class HomeController implements Initializable {
     }
 
 
-    // Streams:
-    //TODO: String getMostPopularActor(List<Movie> movies)
-    //gibt anzahl der filme eines bestimmten regisseurs zurück
-    public long countMoviesFrom(List<Movie> movies, String director) {
-        return movies.stream()
-                .filter(movie -> movie.directors != null && Arrays.asList(movie.directors).contains(director))
-                .count();
+
+
+    String getMostPopularActor(List<Movie> movies) {
+        List<String> newList = new ArrayList<>();
+        movies.stream().map(m -> newList.addAll(Arrays.asList(m.mainCast))).collect(Collectors.toList());
+        Map<String, Long> newMap = newList.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+        return newMap.entrySet().stream().max(Map.Entry.comparingByValue()).map(Map.Entry::getKey).orElse(null);
     }
+
+
 
 }
